@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contoh Tampilan Data API</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    h1 { color: #4f46e5; }
+    .card {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+    }
+    pre {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    button {
+      background: #4f46e5;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+  <h1>Dashboard Data Realtime</h1>
+  <div class="card">
+    <button onclick="fetchData()">Muat Data API</button>
+    <h3>Hasil Data:</h3>
+    <pre id="output">Klik tombol di atas untuk mengambil data...</pre>
+  </div>
+
+  <script>
+    async function fetchData() {
+      const output = document.getElementById('output');
+      output.textContent = 'Memuat data...';
+      try {
+        // Ganti URL dengan endpoint API Anda (lokal atau Vercel)
+        const response = await fetch('/api/rtdb');
+        const result = await response.json();
+        
+        output.textContent = JSON.stringify(result, null, 2);
+      } catch (err) {
+        output.textContent = 'Error: ' + err.message;
+      }
+    }
+
+    // Otomatis fetch saat halaman dimuat
+    fetchData();
+  </script>
+
+</body>
+</html>
