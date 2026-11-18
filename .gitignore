@@ -3,3 +3,5 @@ node_modules/
 .env.save
 .env.local
 *.log
+.vercel
+.env*
